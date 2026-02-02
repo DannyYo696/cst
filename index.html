@@ -256,14 +256,32 @@
 
         /* 1. Hero */
         .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+
+    background-image: url('https://raw.githubusercontent.com/DannyYo696/svillage/3a08aca9b38e922386e6f009b802440fe6e7c120/businesses-bg.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55); /* adjust darkness */
+    z-index: 1;
+}
+
         
-        .hero-content { max-width: 800px; z-index: 2; }
+        .hero-content { 
+            max-width: 800px; z-index: 2;
+            margin-left: 120px;
+        
+        }
         
         .hero h1 {
             font-family: var(--font-head);
@@ -582,7 +600,7 @@
         .news-card:hover { transform: translateY(-10px); border-color: var(--primary); }
         .news-img { height: 200px; background: #1e293b; }
         .news-content { padding: 30px; }
-        .news-date { font-size: 0.8rem; color: var(--primary); margin-bottom: 10px; display: block; }
+        .news-date { font-size: 0.8rem; color: #f97316; margin-bottom: 10px; display: block; }
 
         /* 9. Footer CTA */
         .cta-section {
@@ -785,7 +803,7 @@
 
             /* Hero Centering */
             .hero { padding-top: 100px; flex-direction: column-reverse; text-align: center; }
-            .hero-content { margin-top: 50px; text-align: center; } /* Center content */
+            .hero-content { margin-top: 50px; text-align: center; margin-right: 80px; } /* Center content */
             .hero-content .flex { justify-content: center; } /* Center buttons */
             .hero-visual { position: relative; width: 100%; height: 300px; right: auto; transform: none; top: auto; }
             .stats-bar { grid-template-columns: 1fr; }
@@ -862,22 +880,22 @@
         <section id="home" class="page-section">
             
             <!-- 1. Hero Section -->
-            <div class="container hero">
+            <div class="hero">
                 <div class="hero-visual"></div>
                 <div class="floating-card fc-1">
-                    <i class="fas fa-store"></i>
+                    <i style="color: #f97316;" class="fas fa-store"></i>
                     <div>100,000+</div>
                     <div>Merchants & Agents</div>
                 </div>
                 <div class="floating-card fc-2">
-                    <i class="fas fa-users"></i>
+                    <i style="color: #f97316;" class="fas fa-users"></i>
                     <div>10 Million+</div>
                     <div>Customers Served</div>
                 </div>
 
                 <div class="hero-content">
                     <h1>Empowering <span class="text-gradient-orange">Africa's</span><br>Financial Future</h1>
-                    <p>We operate an agile ecosystem of inclusive financial, fintech and value-added services, driven by innovation and purpose-built for African markets.</p>
+                    <p style="color: white;">We operate an agile ecosystem of inclusive financial, fintech and value-added services, driven by innovation and purpose-built for African markets.</p>
                     <!-- Added wrapper div for easier flex centering on mobile -->
                     <div class="flex" style="gap:20px; flex-wrap:wrap;">
                         <a onclick="router('ecosystem')" class="btn btn-primary">Explore Ecosystem</a>
@@ -1239,7 +1257,7 @@
                         <div class="news-img" style="background-image:url('https://picsum.photos/seed/tech3/400/200'); background-size:cover;"></div>
                         <div class="news-content">
                             <span class="news-date">AUG 15, 2026</span>
-                            <h3>Afrikmoney Launches in Kenya</h3>
+                            <h3>Afrikmoney Launches in The Gambia</h3>
                             <p style="color:var(--text-muted); font-size:0.9rem; margin-top:10px;">Expanding our remittance corridors for seamless transfers.</p>
                         </div>
                     </div>
