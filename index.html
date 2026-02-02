@@ -18,9 +18,9 @@
         :root {
             --bg-deep: #030712;
             --bg-card: rgba(17, 24, 39, 0.7);
-            --primary: #f97316; /* Brand Orange */ 
-            --primary-glow: rgba(249, 115, 22, 0.4);
-            --secondary: #0ea5e9; /* Tech Blue */
+            --primary: #003284; /* Blue */
+            --primary-glow: rgba(0, 50, 132, 0.4);
+            --secondary: #f97316; /* Orange */
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border: rgba(255, 255, 255, 0.08);
@@ -141,6 +141,16 @@
             background: rgba(249, 115, 22, 0.1);
         }
 
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+        }
+        .btn-secondary:hover {
+            background: #ea580c;
+            transform: translateY(-2px);
+        }
+
         /* --- CUSTOM CURSOR --- */
         .cursor-dot,
         .cursor-outline {
@@ -197,7 +207,6 @@
         .nav-inner { display: flex; justify-content: space-between; align-items: center; }
         
         .logo { font-family: var(--font-head); font-weight: 700; font-size: 1.5rem; letter-spacing: -1px; display: flex; align-items: center; gap: 10px; }
-        .logo img { height: 40px; width: auto; }
         .logo span { color: var(--primary); }
 
         .nav-links { display: flex; gap: 40px; }
@@ -239,35 +248,15 @@
             align-items: center;
             position: relative;
             overflow: hidden;
-            
-            /* NEW: BACKGROUND IMAGE SETUP */
-            background-image: url('https://picsum.photos/seed/finance_city_dark/1920/1080.jpg'); /* High quality abstract/city image */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* Parallax effect */
         }
-
-        /* NEW: OVERLAY to ensure text readability */
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* Gradient: Solid dark on left (for text), fading to transparent on right (to show image) */
-            background: linear-gradient(90deg, rgba(3, 7, 18, 0.98) 0%, rgba(3, 7, 18, 0.85) 45%, rgba(3, 7, 18, 0.4) 100%);
-            z-index: 1; /* Above background image, below content */
-        }
-
-        .hero-content { max-width: 800px; z-index: 2; position: relative; }
+        
+        .hero-content { max-width: 800px; z-index: 2; }
         
         .hero h1 {
             font-family: var(--font-head);
             font-size: clamp(3rem, 6vw, 6rem);
             line-height: 1.1;
             margin-bottom: 30px;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.5); /* Enhance text readability against complex photo */
         }
         
         .hero p {
@@ -275,7 +264,6 @@
             color: var(--text-muted);
             margin-bottom: 40px;
             max-width: 600px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
         .hero-visual {
@@ -286,22 +274,21 @@
             width: 600px;
             height: 600px;
             background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
-            opacity: 0.3; /* Reduced opacity to blend better with photo */
-            filter: blur(80px);
-            z-index: 1; /* Behind floating cards, but mixes with photo */
-            mix-blend-mode: screen; /* Blends nicely with dark photos */
+            opacity: 0.4;
+            filter: blur(60px);
+            z-index: 1;
         }
 
         .floating-card {
             position: absolute;
-            background: rgba(255, 255, 255, 0.05); /* Slightly more transparent for image background */
-            backdrop-filter: blur(16px); /* Increased blur for better readability */
-            border: 1px solid rgba(255, 255, 255, 0.15); /* Brighter border */
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
             padding: 20px;
             border-radius: 16px;
             animation: float 6s ease-in-out infinite;
             z-index: 3;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
         }
         .fc-1 { top: 20%; right: 15%; animation-delay: 0s; }
@@ -314,7 +301,7 @@
             font-weight: bold; font-size: 1.4rem; color: white; margin-bottom: 4px;
         }
         .floating-card div:last-child {
-            font-size: 0.85rem; color: #ccc; text-transform: uppercase; letter-spacing: 0.5px;
+            font-size: 0.85rem; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px;
         }
 
         @keyframes float {
@@ -451,7 +438,7 @@
         .stat-item h3 { font-family: var(--font-head); font-size: 3rem; font-weight: 700; color: white; }
         .stat-item p { color: var(--text-muted); margin-top: 10px; }
 
-        /* --- NEW SECTION 6: API Showcase (Developer Experience) --- */
+        /* --- SECTION 6: API Showcase (Developer Experience) --- */
         .api-showcase {
             display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
             background: #0b1221; border-radius: 30px; padding: 60px; border: 1px solid var(--border);
@@ -546,15 +533,87 @@
             background: radial-gradient(circle at center, rgba(249,115,22,0.1) 0%, transparent 70%);
             padding: 150px 0;
         }
-        .btn-secondary {
-            background: var(--secondary);
-            color: white;
-            box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
+
+        /* --- DOCS MODAL STYLES --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
         }
-        .btn-secondary:hover {
-            box-shadow: 0 0 40px rgba(14, 165, 233, 0.6);
-            transform: translateY(-2px);
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+
+        .docs-modal {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 90%; max-width: 900px;
+            background: rgba(17, 24, 39, 0.95);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px;
+            z-index: 10001;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s var(--ease-out);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
         }
+
+        .docs-modal.active { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+
+        .modal-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 20px;
+        }
+        .modal-header h2 { font-family: var(--font-head); font-size: 1.8rem; color: white; }
+        .close-modal-btn {
+            background: transparent; border: none; color: var(--text-muted); font-size: 1.5rem; transition: 0.3s;
+        }
+        .close-modal-btn:hover { color: var(--secondary); transform: rotate(90deg); }
+
+        .docs-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;
+        }
+
+        .doc-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doc-card:hover {
+            border-color: var(--secondary);
+            background: rgba(249, 115, 22, 0.05);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .doc-card i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.05);
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin-left: auto; margin-right: auto;
+            transition: 0.3s;
+        }
+        .doc-card:hover i { background: var(--secondary); color: white; }
+
+        .doc-card h3 { font-family: var(--font-head); font-size: 1.2rem; color: white; margin-bottom: 10px; }
+        .doc-card p { font-size: 0.9rem; color: var(--text-muted); }
+        .doc-card .arrow { margin-top: 15px; opacity: 0; transform: translateX(-10px); transition: 0.3s; color: var(--secondary); font-size: 0.9rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;}
+        .doc-card:hover .arrow { opacity: 1; transform: translateX(0); }
 
         /* --- SUB-PAGE STYLES --- */
         
@@ -650,7 +709,7 @@
             .nav-links { position: fixed; top: 0; right: 0; width: 70%; height: 100vh; background: #030712; flex-direction: column; padding: 100px 40px; transform: translateX(100%); transition: 0.4s; z-index: 101; border-left: 1px solid var(--border); }
             .nav-links.active { transform: translateX(0); }
             .menu-toggle { display: block; z-index: 102; }
-            .hero { padding-top: 100px; flex-direction: column-reverse; text-align: center; background-attachment: scroll; /* Disable parallax on mobile for performance */ }
+            .hero { padding-top: 100px; flex-direction: column-reverse; text-align: center; }
             .hero-content { margin-top: 50px; }
             .hero-visual { position: relative; width: 100%; height: 300px; right: auto; transform: none; top: auto; }
             .stats-bar { grid-template-columns: 1fr; }
@@ -664,6 +723,10 @@
             
             /* Adjust map for mobile */
             .map-placeholder { height: 400px; }
+
+            /* Modal Responsive */
+            .docs-modal { width: 95%; padding: 20px; }
+            .docs-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -683,7 +746,7 @@
     <header id="header">
         <div class="container nav-inner">
             <a href="#" class="logo" onclick="router('home')">
-                <img src="https://raw.githubusercontent.com/DannyYo696/svillage/3a08aca9b38e922386e6f009b802440fe6e7c120/cs-logo.webp" alt="CapitalSage Logo" />
+                <img src="https://raw.githubusercontent.com/DannyYo696/svillage/3a08aca9b38e922386e6f009b802440fe6e7c120/cs-logo.webp" alt="CapitalSage Logo" style="height: 40px;"/>
             </a>
 
             <div class="menu-toggle"><i class="fas fa-bars"></i></div>
@@ -723,7 +786,7 @@
                 <div class="hero-content">
                     <h1>Empowering <span class="text-gradient-orange">Africa's</span><br>Financial Future</h1>
                     <p>We operate an agile ecosystem of inclusive financial, fintech and value-added services, driven by innovation and purpose-built for African markets.</p>
-                    <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content: flex-start;">
+                    <div style="display:flex; gap:20px; flex-wrap:wrap;">
                         <a onclick="router('ecosystem')" class="btn btn-primary">Explore Ecosystem</a>
                         <a onclick="router('about')" class="btn btn-outline">Our Vision</a>
                     </div>
@@ -899,7 +962,9 @@
                             <li style="margin-bottom:10px;"><i class="fas fa-check" style="color:var(--primary); margin-right:10px;"></i> Sandbox Environment</li>
                             <li><i class="fas fa-check" style="color:var(--primary); margin-right:10px;"></i> Webhook Notifications</li>
                         </ul>
-                        <a href="#" class="btn btn-outline">Read Docs</a>
+                        
+                        <!-- UPDATED BUTTON: Added ID for JS targeting -->
+                        <button id="open-docs-modal" class="btn btn-outline">Read Docs</button>
                     </div>
                     <div class="code-block">
                         <div class="code-line"><span class="keyword">const</span> response = <span class="keyword">await</span> capitalsage.<span class="func">payments</span>.<span class="func">initiate</span>({</div>
@@ -975,7 +1040,7 @@
                 </div>
             </div>
 
-            <!-- 10. Leadership Teaser -->
+            <!-- 11. Leadership Teaser -->
             <div class="container">
                 <div class="leadership-teaser">
                     <div>
@@ -986,7 +1051,7 @@
                 </div>
             </div>
 
-            <!-- 11. Latest News -->
+            <!-- 12. Latest News -->
             <div class="container section-padding">
                 <h2 style="font-family:var(--font-head); font-size:2.5rem;">Latest Insights</h2>
                 <div class="news-grid">
@@ -1017,7 +1082,7 @@
                 </div>
             </div>
 
-            <!-- 12. Footer CTA -->
+            <!-- 13. Footer CTA -->
             <div style="background-color: #003284; border-radius: 50px;" class="container cta-section">
                 <h2 style="font-family:var(--font-head); font-size:4rem; margin-bottom:30px;">Ready to Grow?</h2>
                 <p style="font-size:1.2rem; color:var(--text-muted); margin-bottom:40px;">Join thousands of businesses trusting CapitalSage technology.</p>
@@ -1321,6 +1386,38 @@
         </div>
     </footer>
 
+    <!-- NEW: DOCS SELECTION MODAL -->
+    <div id="docs-modal-overlay" class="modal-overlay"></div>
+    <div id="docs-modal" class="docs-modal">
+        <div class="modal-header">
+            <h2>Select Documentation</h2>
+            <button id="close-docs-modal" class="close-modal-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="docs-grid">
+            <!-- Option 1 -->
+            <div class="doc-card" onclick="openExternalLink('https://ercaspay.com/docs')">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <h3>ERCASPay</h3>
+                <p>Payment gateway, collections, and disbursement APIs.</p>
+                <div class="arrow">View Docs <i class="fas fa-arrow-right"></i></div>
+            </div>
+            <!-- Option 2 -->
+            <div class="doc-card" onclick="openExternalLink('https://sagecloud.com/docs')">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h3>Sage Cloud</h3>
+                <p>Cloud hosting, storage, and infrastructure APIs.</p>
+                <div class="arrow">View Docs <i class="fas fa-arrow-right"></i></div>
+            </div>
+            <!-- Option 3 -->
+            <div class="doc-card" onclick="openExternalLink('https://sagehive.com/docs')">
+                <i class="fas fa-project-diagram"></i>
+                <h3>Sage Hive</h3>
+                <p>Core banking and microservice integration APIs.</p>
+                <div class="arrow">View Docs <i class="fas fa-arrow-right"></i></div>
+            </div>
+        </div>
+    </div>
+
     <!-- JAVASCRIPT LOGIC -->
     <script>
         // --- Dynamic Glow Logic ---
@@ -1353,7 +1450,8 @@
         });
 
         // Hover Effect for Cursor
-        const interactables = document.querySelectorAll('a, button, input, textarea, .job-card, .member-card, .bento-box, .approach-card, .review-card, .eco-card');
+        // Updated querySelector to include the new modal cards
+        const interactables = document.querySelectorAll('a, button, input, textarea, .job-card, .member-card, .bento-box, .approach-card, .review-card, .eco-card, .doc-card, .close-modal-btn');
         interactables.forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
@@ -1431,6 +1529,53 @@
                 btn.classList.add('active');
             });
         });
+
+        // --- DOCS MODAL LOGIC ---
+        const openDocsBtn = document.getElementById('open-docs-modal');
+        const docsModal = document.getElementById('docs-modal');
+        const docsOverlay = document.getElementById('docs-modal-overlay');
+        const closeDocsBtn = document.getElementById('close-docs-modal');
+
+        // Function to open modal
+        function openDocsModal() {
+            docsModal.classList.add('active');
+            docsOverlay.classList.add('active');
+        }
+
+        // Function to close modal
+        function closeDocsModal() {
+            docsModal.classList.remove('active');
+            docsOverlay.classList.remove('active');
+        }
+
+        // Event Listeners
+        if(openDocsBtn) {
+            openDocsBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openDocsModal();
+            });
+        }
+
+        if(closeDocsBtn) {
+            closeDocsBtn.addEventListener('click', closeDocsModal);
+        }
+
+        if(docsOverlay) {
+            docsOverlay.addEventListener('click', closeDocsModal);
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && docsModal.classList.contains('active')) {
+                closeDocsModal();
+            }
+        });
+
+        // Function to open external link
+        function openExternalLink(url) {
+            // Open in a new tab
+            window.open(url, '_blank');
+        }
 
     </script>
 </body>
