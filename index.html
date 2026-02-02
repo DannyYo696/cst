@@ -13,6 +13,19 @@
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+   
+
+    <!-- Primary WebP -->
+<link rel="icon" href="https://raw.githubusercontent.com/DannyYo696/svillage/3a08aca9b38e922386e6f009b802440fe6e7c120/cs-logo.webp" type="image/webp">
+
+<!-- Fallback PNG -->
+<link rel="icon" href="https://raw.githubusercontent.com/DannyYo696/svillage/3a08aca9b38e922386e6f009b802440fe6e7c120/cs-logo.webp" type="image/png">
+
+<!-- Classic ICO fallback (optional, safest) -->
+<link rel="icon" href="https://raw.githubusercontent.com/DannyYo696/svillage/3a08aca9b38e922386e6f009b802440fe6e7c120/cs-logo.webp" type="image/x-icon">
+
+
+
     <style>
         /* --- CORE VARIABLES & RESET --- */
         :root {
@@ -204,7 +217,7 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; position: relative; } /* Added position relative */
         
         .logo { font-family: var(--font-head); font-weight: 700; font-size: 1.5rem; letter-spacing: -1px; display: flex; align-items: center; gap: 10px; }
         .logo span { color: var(--primary); }
@@ -225,7 +238,7 @@
         }
         .nav-link:hover::after, .nav-link.active::after { width: 100%; }
 
-        .menu-toggle { display: none; font-size: 1.5rem; }
+        .menu-toggle { display: none; font-size: 1.5rem; color: white; z-index: 102; background: none; border: none; }
 
         /* --- PAGE TRANSITIONS --- */
         .page-section {
@@ -309,11 +322,55 @@
             50% { transform: translateY(-20px); }
         }
 
-        /* 2. Marquee */
-        .marquee-section { overflow: hidden; padding: 60px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.2); }
-        .marquee-track { display: flex; gap: 60px; animation: scroll 30s linear infinite; white-space: nowrap; }
-        .marquee-item { font-family: var(--font-head); font-size: 2rem; color: rgba(255,255,255,0.2); font-weight: 700; text-transform: uppercase; }
+        /* 2. Marquee - REDESIGNED */
+        .marquee-section { 
+            overflow: hidden; 
+            padding: 30px 0; 
+            background: #f8fafc; /* White/Off-white body */
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .marquee-track { display: flex; gap: 30px; animation: scroll 40s linear infinite; width: max-content; }
         
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 12px;
+            padding: 15px 25px;
+            min-width: 160px;
+            height: 80px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        .marquee-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .marquee-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .marquee-content i {
+            font-size: 1.5rem;
+            color: #0f172a; /* Dark text for contrast on white */
+            margin-bottom: 5px;
+        }
+
+        .marquee-content span {
+            font-family: var(--font-head);
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #475569;
+            text-transform: uppercase;
+        }
+
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* 3. Approach (Grid) */
@@ -546,6 +603,12 @@
             pointer-events: none;
         }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
+.marquee-content img {
+    height: 40px;        /* adjust to taste */
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
 
         .docs-modal {
             position: fixed;
@@ -706,11 +769,24 @@
         }
 
         @media (max-width: 768px) {
-            .nav-links { position: fixed; top: 0; right: 0; width: 70%; height: 100vh; background: #030712; flex-direction: column; padding: 100px 40px; transform: translateX(100%); transition: 0.4s; z-index: 101; border-left: 1px solid var(--border); }
+            .nav-links { 
+                position: fixed; top: 0; right: 0; width: 70%; height: 100vh; background: #030712; 
+                flex-direction: column; padding: 100px 40px; transform: translateX(100%); 
+                transition: 0.4s; z-index: 101; border-left: 1px solid var(--border); 
+            }
             .nav-links.active { transform: translateX(0); }
-            .menu-toggle { display: block; z-index: 102; }
+            
+            .menu-toggle { 
+                display: block; 
+                position: absolute; 
+                right: 20px; 
+                top: 20px; 
+            }
+
+            /* Hero Centering */
             .hero { padding-top: 100px; flex-direction: column-reverse; text-align: center; }
-            .hero-content { margin-top: 50px; }
+            .hero-content { margin-top: 50px; text-align: center; } /* Center content */
+            .hero-content .flex { justify-content: center; } /* Center buttons */
             .hero-visual { position: relative; width: 100%; height: 300px; right: auto; transform: none; top: auto; }
             .stats-bar { grid-template-columns: 1fr; }
             .leadership-teaser { flex-direction: column; text-align: center; gap: 30px; }
@@ -724,9 +800,25 @@
             /* Adjust map for mobile */
             .map-placeholder { height: 400px; }
 
-            /* Modal Responsive */
-            .docs-modal { width: 95%; padding: 20px; }
+            /* --- MOBILE MODAL FIX --- */
+            .docs-modal { 
+                width: 90%; 
+                max-height: 85vh; /* Prevent overflow */
+                overflow-y: auto; /* Allow scrolling inside modal */
+                padding: 20px; 
+                border-radius: 16px;
+            }
             .docs-grid { grid-template-columns: 1fr; }
+            .modal-header h2 { font-size: 1.4rem; }
+            .doc-card { padding: 20px; }
+            .doc-card h3 { font-size: 1.1rem; }
+            .doc-card p { font-size: 0.85rem; }
+            .doc-card i { font-size: 2rem; width: 60px; height: 60px; }
+
+            /* --- MOBILE CTA FIX --- */
+            .cta-section { padding: 80px 20px; } /* Reduced padding */
+            .cta-section h2 { font-size: 2.5rem; } /* Reduced font size */
+            .cta-section p { font-size: 1rem; margin-bottom: 30px; }
         }
     </style>
 </head>
@@ -749,7 +841,7 @@
                 <img src="https://raw.githubusercontent.com/DannyYo696/svillage/3a08aca9b38e922386e6f009b802440fe6e7c120/cs-logo.webp" alt="CapitalSage Logo" style="height: 40px;"/>
             </a>
 
-            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+            <button class="menu-toggle"><i class="fas fa-bars"></i></button>
             <nav>
                 <ul class="nav-links">
                     <li><a href="#" class="nav-link active" data-page="home" onclick="router('home')">Home</a></li>
@@ -786,30 +878,105 @@
                 <div class="hero-content">
                     <h1>Empowering <span class="text-gradient-orange">Africa's</span><br>Financial Future</h1>
                     <p>We operate an agile ecosystem of inclusive financial, fintech and value-added services, driven by innovation and purpose-built for African markets.</p>
-                    <div style="display:flex; gap:20px; flex-wrap:wrap;">
+                    <!-- Added wrapper div for easier flex centering on mobile -->
+                    <div class="flex" style="gap:20px; flex-wrap:wrap;">
                         <a onclick="router('ecosystem')" class="btn btn-primary">Explore Ecosystem</a>
                         <a onclick="router('about')" class="btn btn-outline">Our Vision</a>
                     </div>
                 </div>
             </div>
 
-            <!-- 2. Marquee -->
+            <!-- 2. Marquee - REDESIGNED -->
             <div class="marquee-section">
-                <div class="marquee-track">
-                    <div class="marquee-item">ERCASPAY</div>
-                    <div class="marquee-item">KOLOMONI</div>
-                    <div class="marquee-item">REGIUS</div>
-                    <div class="marquee-item">AFRIKMONEY</div>
-                    <div class="marquee-item">CREDITASSIST</div>
-                    <div class="marquee-item">SAGEBRUSH</div>
-                    <div class="marquee-item">ERCASPAY</div>
-                    <div class="marquee-item">KOLOMONI</div>
-                    <div class="marquee-item">REGIUS</div>
-                    <div class="marquee-item">AFRIKMONEY</div>
-                    <div class="marquee-item">CREDITASSIST</div>
-                    <div class="marquee-item">SAGEBRUSH</div>
-                </div>
+    <div class="marquee-track">
+        <!-- Items duplicated for seamless loop -->
+        <div class="marquee-item">
+            <div class="marquee-content">
+                <img src="https://raw.githubusercontent.com/DannyYo696/svillage/3a08aca9b38e922386e6f009b802440fe6e7c120/ercas.webp" alt="ErcasPay Logo">
             </div>
+        </div>
+
+        <div class="marquee-item">
+            <div class="marquee-content">
+                <img src="https://raw.githubusercontent.com/DannyYo696/svillage/3a08aca9b38e922386e6f009b802440fe6e7c120/KM%20Logo%20Blue.png" alt="Kolomoni Logo">
+            </div>
+        </div>
+
+        <div class="marquee-item">
+            <div class="marquee-content">
+                <img src="https://raw.githubusercontent.com/DannyYo696/csassets/8b5789806dd63541d97f3f92491e445032fc2e09/Rc_capital.png" alt="Regius Logo">
+            </div>
+        </div>
+
+        <div class="marquee-item">
+            <div class="marquee-content">
+                <img src="https://raw.githubusercontent.com/DannyYo696/csassets/8b5789806dd63541d97f3f92491e445032fc2e09/Rc_AM.png" alt="Regius Logo">
+            </div>
+        </div>
+
+        <div class="marquee-item">
+            <div class="marquee-content">
+                <img src="https://raw.githubusercontent.com/DannyYo696/csassets/8b5789806dd63541d97f3f92491e445032fc2e09/tblue.png" alt="AfrikMoney Logo">
+            </div>
+        </div>
+
+        <div class="marquee-item">
+            <div class="marquee-content">
+                <img src="https://raw.githubusercontent.com/DannyYo696/csassets/ca15e2ba3318b9e7c16ee4e9a04a9490753ad14a/CREDIT%20ASSIST%20-%203.png" alt="CreditAssist Logo">
+            </div>
+        </div>
+
+        <div class="marquee-item">
+            <div class="marquee-content">
+                <img src="https://raw.githubusercontent.com/DannyYo696/csassets/ca15e2ba3318b9e7c16ee4e9a04a9490753ad14a/sbrush.png" alt="Sagebrush Logo">
+            </div>
+        </div>
+
+        <!-- Duplicate Set -->
+        <div class="marquee-item">
+            <div class="marquee-content">
+                <img src="https://raw.githubusercontent.com/DannyYo696/svillage/3a08aca9b38e922386e6f009b802440fe6e7c120/ercas.webp" alt="ErcasPay Logo">
+            </div>
+        </div>
+
+        <div class="marquee-item">
+            <div class="marquee-content">
+                <img src="https://raw.githubusercontent.com/DannyYo696/svillage/3a08aca9b38e922386e6f009b802440fe6e7c120/KM%20Logo%20Blue.png" alt="Kolomoni Logo">
+            </div>
+        </div>
+
+        <div class="marquee-item">
+            <div class="marquee-content">
+                <img src="https://raw.githubusercontent.com/DannyYo696/csassets/8b5789806dd63541d97f3f92491e445032fc2e09/Rc_capital.png" alt="Regius Logo">
+            </div>
+        </div>
+
+        <div class="marquee-item">
+            <div class="marquee-content">
+                <img src="https://raw.githubusercontent.com/DannyYo696/csassets/8b5789806dd63541d97f3f92491e445032fc2e09/Rc_AM.png" alt="Regius Logo">
+            </div>
+        </div>
+
+        <div class="marquee-item">
+            <div class="marquee-content">
+                <img src="https://raw.githubusercontent.com/DannyYo696/csassets/8b5789806dd63541d97f3f92491e445032fc2e09/tblue.png" alt="AfrikMoney Logo">
+            </div>
+        </div>
+
+        <div class="marquee-item">
+            <div class="marquee-content">
+                <img src="https://raw.githubusercontent.com/DannyYo696/csassets/ca15e2ba3318b9e7c16ee4e9a04a9490753ad14a/CREDIT%20ASSIST%20-%203.png" alt="CreditAssist Logo">
+            </div>
+        </div>
+
+        <div class="marquee-item">
+            <div class="marquee-content">
+                <img src="/https://raw.githubusercontent.com/DannyYo696/csassets/ca15e2ba3318b9e7c16ee4e9a04a9490753ad14a/sbrush.png" alt="Sagebrush Logo">
+            </div>
+        </div>
+    </div>
+</div>
+
 
             <!-- 3. About/Approach -->
             <div class="container section-padding">
@@ -895,19 +1062,16 @@
                             <span class="flag-label">UAE</span>
                         </div>
                         <!-- Nigeria -->
-                        <div class="flag-node" style="top: 70%; left: 45%; animation-delay: 1s;">
-                            <img src="https://flagcdn.com/w80/ng.png" alt="Nigeria" class="flag-img">
-                            <span class="flag-label">Nigeria</span>
-                        </div>
+                        
                         <!-- Gambia -->
                         <div class="flag-node" style="top: 60%; left: 35%; animation-delay: 1.5s;">
                             <img src="https://flagcdn.com/w80/gm.png" alt="Gambia" class="flag-img">
                             <span class="flag-label">Gambia</span>
                         </div>
                         <!-- Kenya -->
-                        <div class="flag-node" style="top: 75%; left: 70%; animation-delay: 2s;">
-                            <img src="https://flagcdn.com/w80/ke.png" alt="Kenya" class="flag-img">
-                            <span class="flag-label">Kenya</span>
+                        <div class="flag-node" style="top: 70%; left: 70%; animation-delay: 1s;">
+                            <img src="https://flagcdn.com/w80/ng.png" alt="Nigeria" class="flag-img">
+                            <span class="flag-label">Nigeria</span>
                         </div>
                     </div>
                 </div>
@@ -1451,7 +1615,7 @@
 
         // Hover Effect for Cursor
         // Updated querySelector to include the new modal cards
-        const interactables = document.querySelectorAll('a, button, input, textarea, .job-card, .member-card, .bento-box, .approach-card, .review-card, .eco-card, .doc-card, .close-modal-btn');
+        const interactables = document.querySelectorAll('a, button, input, textarea, .job-card, .member-card, .bento-box, .approach-card, .review-card, .eco-card, .doc-card, .close-modal-btn, .menu-toggle');
         interactables.forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
@@ -1487,11 +1651,11 @@
 
             // Close Mobile Menu if open
             const navMenu = document.querySelector('.nav-links');
-            const menuToggle = document.querySelector('.menu-toggle i');
+            const menuToggleIcon = document.querySelector('.menu-toggle i');
             if(navMenu.classList.contains('active')) {
                 navMenu.classList.remove('active');
-                menuToggle.classList.remove('fa-times');
-                menuToggle.classList.add('fa-bars');
+                menuToggleIcon.classList.remove('fa-times');
+                menuToggleIcon.classList.add('fa-bars');
             }
         }
 
@@ -1506,12 +1670,12 @@
         });
 
         // --- Mobile Menu Toggle ---
-        const menuToggle = document.querySelector('.menu-toggle');
+        const menuToggleBtn = document.querySelector('.menu-toggle');
         const navLinksContainer = document.querySelector('.nav-links');
         
-        menuToggle.addEventListener('click', () => {
+        menuToggleBtn.addEventListener('click', () => {
             navLinksContainer.classList.toggle('active');
-            const icon = menuToggle.querySelector('i');
+            const icon = menuToggleBtn.querySelector('i');
             if(navLinksContainer.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
                 icon.classList.add('fa-times');
